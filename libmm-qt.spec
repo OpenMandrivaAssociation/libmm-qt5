@@ -1,16 +1,17 @@
 %define major 5
 %define libname %mklibname KF5ModemManagerQt %{major}
 %define devname %mklibname -d KF5ModemManagerQt
+%define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 Summary:	Qt5-only wrapper for ModemManager DBus API
 Name:		libmm-qt5
-Version:	5.0.95
+Version:	5.1.0.1
 Release:	1
 Epoch:		1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://projects.kde.org/projects/extragear/libs/libmm-qt
-Source0:	ftp://ftp.kde.org/pub/kde/stable/plasma/5.0.0/libmm-qt-%{version}.tar.xz
+Source0:	ftp://ftp.kde.org/pub/kde/stable/plasma/%{plasmaver}/libmm-qt-%{version}.tar.xz
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(ModemManager)
 BuildRequires:	pkgconfig(Qt5Core)
@@ -18,6 +19,7 @@ BuildRequires:	pkgconfig(Qt5DBus)
 BuildRequires:	pkgconfig(Qt5Xml)
 BuildRequires:	cmake(KF5)
 BuildRequires:	cmake(ECM)
+BuildRequires:	ninja
 
 %description
 Qt library for ModemManager.
@@ -60,12 +62,12 @@ Qt libraries and headers for developing applications that use ModemManager.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -qn libmm-qt-%{version}
+%setup -qn libmm-qt-%{plasmaver}
 
 %build
-%cmake
-%make
+%cmake -G Ninja
+ninja
 
 %install
-%makeinstall_std -C build
+DESTDIR="%{buildroot}" ninja -C build install
 
