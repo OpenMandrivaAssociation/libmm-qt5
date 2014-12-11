@@ -57,7 +57,7 @@ Qt libraries and headers for developing applications that use ModemManager.
 %{_includedir}/KF5/ModemManagerQt
 %{_includedir}/KF5/modemmanagerqt_version.h
 %{_libdir}/libKF5ModemManagerQt.so
-%{_prefix}/mkspecs/modules/*.pri
+%{_libdir}/qt5/mkspecs/modules/*.pri
 %{_libdir}/cmake/KF5ModemManagerQt
 
 #----------------------------------------------------------------------------
@@ -66,7 +66,8 @@ Qt libraries and headers for developing applications that use ModemManager.
 %setup -qn libmm-qt-%{plasmaver}
 
 %build
-%cmake -G Ninja
+%cmake -G Ninja \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 ninja
 
 %install
