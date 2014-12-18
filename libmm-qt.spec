@@ -6,8 +6,8 @@
 
 Summary:	Qt5-only wrapper for ModemManager DBus API
 Name:		libmm-qt5
-Version:	5.1.1
-Release:	2
+Version:	5.1.2
+Release:	1
 Epoch:		1
 License:	LGPLv2+
 Group:		System/Libraries
